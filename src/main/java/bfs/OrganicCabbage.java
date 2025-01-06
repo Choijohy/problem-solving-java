@@ -1,5 +1,15 @@
 package bfs;
 
+/*
+ 문제: 백준 1012(https://www.acmicpc.net/problem/1012)
+ 자료구조:
+    - 2차원 배열
+    - BFS 구현을 위한 연결 리스트 기반 큐
+ 알고리즘:
+    - BFS
+ */
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

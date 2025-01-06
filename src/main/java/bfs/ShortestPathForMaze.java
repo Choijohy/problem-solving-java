@@ -3,6 +3,15 @@ package bfs;
 import java.util.*;
 import java.io.*;
 
+/*
+ 문제: 백준 2178(https://www.acmicpc.net/problem/2178)
+ 자료구조:
+    - 2차원 배열
+    - BFS 구현을 위한 연결 리스트 기반 큐
+ 알고리즘:
+    - BFS
+    - 최단거리를 구해야 하므로 DFS가 아닌 BFS 선택
+ */
 public class ShortestPathForMaze {
     public static void main(String[] args) throws IOException {
         // 입력

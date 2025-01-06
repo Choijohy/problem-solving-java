@@ -1,8 +1,5 @@
 package bfs;
 
-import java.util.*;
-import java.io.*;
-
 /*
  문제: 백준 2178(https://www.acmicpc.net/problem/2178)
  자료구조:
@@ -12,6 +9,10 @@ import java.io.*;
     - BFS
     - 최단거리를 구해야 하므로 DFS가 아닌 BFS 선택
  */
+
+import java.util.*;
+import java.io.*;
+
 public class ShortestPathForMaze {
     public static void main(String[] args) throws IOException {
         // 입력

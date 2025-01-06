@@ -12,25 +12,22 @@ public class ShortestPathForMaze {
         int targetX = Integer.parseInt(firstLine[0]);
         int targetY = Integer.parseInt(firstLine[1]);
 
-        List<List<Integer>> maze = new ArrayList<>();
+        int[][] maze = new int[targetX][targetY];
 
 
         for (int i = 0; i < targetX; i++) {
             String line = br.readLine();
-            List<Integer> row = new ArrayList<>();
-            for (char c : line.toCharArray()) {
-                row.add(c - '0'); // 문자를 숫자로 변환
+            for (int j = 0; j < targetY; j++){
+                maze[i][j] = line.charAt(j) - '0';
             }
-            maze.add(row);
         }
 
         // 풀이
         Queue<int[]> queue = new LinkedList<>();
         queue.add(new int[]{0,0});
 
-        List<Integer> xList = Arrays.asList(1,-1,0,0);
-        List<Integer> yList = Arrays.asList(0,0,1,-1);
-
+        int[] xList = {0,0,1,-1};
+        int[] yList = {1,-1,0,0};
 
         int cnt = 1;
         while (!queue.isEmpty()){
@@ -47,15 +44,15 @@ public class ShortestPathForMaze {
                     System.out.println(cnt);
                     return;
                 }
-                if (maze.get(x).get(y) == 1){
-                    maze.get(x).set(y, 0);
+                if (maze[x][y] == 1){
+                    maze[x][y] = 0;
 
                     // 상하좌우 인근 경로 탐색 및 해당 경로가 1일 경우 큐에 추가
                     for (int n=0; n<4;n++){
-                        int newX = x + xList.get(n);
-                        int newY = y + yList.get(n);
+                        int newX = x + xList[n];
+                        int newY = y + yList[n];
                         if (newX >=0 && newX < targetX && newY >= 0 && newY < targetY){
-                            if (maze.get(newX).get(newY) == 1){
+                            if (maze[newX][newY] == 1){
                                 queue.add(new int[]{newX, newY});
                             }
                         }

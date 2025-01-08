@@ -1,4 +1,4 @@
-package bfs;
+package dfs_bfs;
 
 /*
  문제: 백준 2178(https://www.acmicpc.net/problem/2178)

@@ -1,4 +1,4 @@
-package bfs;
+package dfs_bfs;
 
 /*
  문제: 프로그래머스 네트워크(https://school.programmers.co.kr/learn/courses/30/lessons/43162?language=java)

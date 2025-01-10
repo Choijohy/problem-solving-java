@@ -1,0 +1,20 @@
+-- 문제: https://school.programmers.co.kr/learn/courses/30/lessons/276035#qna
+-- 유형: JOIN
+
+SELECT DISTINCT D.ID, D.EMAIL, D.FIRST_NAME, D.LAST_NAME
+FROM DEVELOPERS D
+JOIN SKILLCODES C ON D.SKILL_CODE & C.CODE > 0
+WHERE C.CATEGORY = 'FRONT END'
+ORDER BY D.ID ASC;
+
+
+-- 모든 조합을 구한 뒤 DISTINCT를 하는 불필요한 연산을 제거한다.(1개라도 front end 스킬코드가 포함되면 해당 레코드 반환)
+SELECT D.ID, D.EMAIL, D.FIRST_NAME, D.LAST_NAME
+FROM DEVELOPERS D
+WHERE EXISTS(
+    SELECT 1
+    FROM SKILLCODES S
+    WHERE D.SKILL_CODE & S.CODE > 0
+    AND S.CATEGORY = 'FRONT END'
+)
+ORDER BY D.ID ASC;

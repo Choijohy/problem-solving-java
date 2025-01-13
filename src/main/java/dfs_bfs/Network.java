@@ -91,8 +91,8 @@ class Network {
             return answer;
         }
         private void dfs(int index){
+            checked[index] = true;
             for (int i=0; i<nums; i++){
-                checked[index] = true;
                 if ((network[index][i] == 1) && (!checked[i])){
                     dfs(i);
                 }

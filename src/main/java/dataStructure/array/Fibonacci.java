@@ -1,4 +1,4 @@
-package array;
+package dataStructure.array;
 import java.util.*;
 public class Fibonacci {
     public static ArrayList<Integer> solution(int input1){

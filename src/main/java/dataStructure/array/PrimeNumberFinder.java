@@ -1,4 +1,4 @@
-package array;
+package dataStructure.array;
 /*
 문제: 소수 찾기
 카테고리: 배열

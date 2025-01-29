@@ -1,6 +1,5 @@
-package 이분탐색;
+package 다이나믹프로그래밍;
 
-import java.util.*;
 import java.io.*;
 
 public class Lis2 {

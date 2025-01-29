@@ -26,7 +26,7 @@ public class 배열합치기 {
         int[] a = getArray(br);
         int[] b = getArray(br);
 
-        Solution solution = new Solution(a,b);
+        Solution2 solution = new Solution2(a,b);
         int[] result = solution.solution();
         for (int i=0; i< result.length;i++){
             bw.append(String.valueOf(result[i]+" "));
@@ -40,13 +40,13 @@ public class 배열합치기 {
 
 }
 
-class Solution{
+class Solution2{
   	int n;
   	int m;
     int[] a;
     int[] b;
   	int[] answer;
-	Solution(int[] a, int[] b){
+	Solution2(int[] a, int[] b){
       	this.n = a.length;
       	this.m = b.length;
         this.a = a;

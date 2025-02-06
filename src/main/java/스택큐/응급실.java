@@ -1,5 +1,9 @@
 package 스택큐;
+/*
+문제: 우선순위에 따라 치료 받을 환자 정하기
+카테고리: 우선순위 큐
 
+* */
 import java.util.*;
 import java.io.*;
 

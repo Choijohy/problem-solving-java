@@ -1,4 +1,4 @@
-package 최소스패닝트리;
+package 그리디;
 
 
 import java.io.*;

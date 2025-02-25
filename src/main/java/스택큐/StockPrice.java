@@ -1,33 +1,42 @@
 package 스택큐;
-  import java.util.*;
+import java.util.*;
 
-public class StockPrice {
+public class StockPrice{
+    public int[] solution(int[] prices){
+        int len = prices.length;
+        int[] result = new int[len];
+        Deque<Stock> stack = new ArrayDeque<>();
 
-    class Solution {
-        public int[] solution(int[] prices) {
-            ArrayList<int[]> stack = new ArrayList<>();
+        // 초기값
+        Stock first = new Stock(0, prices[0]);
+        stack.push(first);
 
-            stack.add(new int[] {0,prices[0]});
 
-            int[] result = new int[prices.length];
-
-            for (int i=1; i<prices.length; i++){
-                 while (!stack.isEmpty() && stack.get(stack.size() -1)[1] > prices[i]){
-                        int[] removed = stack.remove(stack.size() -1);
-                        int removedIndex = removed[0];
-                        int diff = i - removedIndex;
-                        result[removedIndex] = diff;
-                    }
-                stack.add(new int[]{i, prices[i]});
+        for (int i=1; i<len; i++){
+            Stock stock = new Stock(i, prices[i]);
+            while (!stack.isEmpty() && stack.peek().price > stock.price){
+                Stock removed = stack.pop();
+                result[removed.day] = stock.day - removed.day;
             }
-
-            while(!stack.isEmpty()){
-                int[] removed = stack.remove(stack.size()-1);
-                result[removed[0]] = prices.length - removed[0]-1;
-            }
-
-
-            return result;
+            stack.push(stock);
         }
+
+        int last = len-1;
+        while(!stack.isEmpty()){
+            Stock stock = stack.pop();
+            result[stock.day] = last - stock.day;
+        }
+
+
+        return result;
+    }
+}
+
+class Stock{
+    int day;
+    int price;
+    Stock(int day, int price){
+        this.day = day;
+        this.price = price;
     }
 }

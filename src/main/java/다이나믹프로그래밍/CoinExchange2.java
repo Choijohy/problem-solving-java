@@ -3,40 +3,32 @@ package 다이나믹프로그래밍;
 import java.util.*;
 import java.io.*;
 
-public class CoinExchange2 {
-  public static int solution(int n, int[] coins, int amount){
-  	int[] dp = new int[amount+1]; // 금액별 필요한 최소 동전 개수
-    Arrays.fill(dp, Integer.MAX_VALUE);
-    dp[0] = 0;
-
-    for (int i=1; i<=amount; i++){
-    	for (int coin: coins){
-        	int left = i - coin;
-          	if (left == 0) {
-                  dp[i] = 1;
-                  break;
+public class CoinExchanger2 {
+  public static int solution(int[] coins, int m){
+  		int[] dp = new int[m+1];
+    	Arrays.fill(dp, Integer.MAX_VALUE);
+    	dp[0] = 0;
+    	for (int amount=1; amount<=m ; amount++){
+        	for (int i=0; i<coins.length; i++){
+            	int coin = coins[i];
+             	if (coin > amount) break;
+              	else dp[amount] = Math.min(dp[amount], dp[amount-coin] + 1); // 각 코인을 사용할때 마다 최솟값 갱신
             }
-          	else if(left > 0) {
-                  dp[i] = Math.min(dp[i], dp[i] = dp[left] + 1);
-            }
-          	else break;
         }
-    }
-    return dp[amount];
+    	return dp[m];
   }
   public static void main(String[] args) throws IOException{
-  	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int n = Integer.parseInt(br.readLine());
-
-    String[] str = br.readLine().split(" ");
+    String[] str= br.readLine().split(" ");
     int[] coins = new int[n];
     for (int i=0; i<n; i++){
     	coins[i] = Integer.parseInt(str[i]);
     }
+    int m = Integer.parseInt(br.readLine());
     Arrays.sort(coins);
-    int amount = Integer.parseInt(br.readLine());
+   	System.out.println(solution(coins, m));
 
-    System.out.println(solution(n, coins, amount));
     return ;
   }
 }

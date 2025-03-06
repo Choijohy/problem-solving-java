@@ -32,7 +32,7 @@ class ChickenDeliver{
         }
 
         Solution_ChickenDeliver solution = new Solution_ChickenDeliver(N,M,homes, stores);
-        solution.dfs(M,0);
+        solution.dfs2(M,0);
         System.out.println(solution.answer);
     }
 
@@ -73,6 +73,27 @@ class Solution_ChickenDeliver{
                 dfs(M-1, i+1); // 선택할 경우
                 selected.remove(selected.size()-1);
             }
+        }
+    }
+
+    public void dfs2(int M, int L){
+        if (M==0){
+            int sum = 0;
+            for (Location home:homes){
+                int dis = Integer.MAX_VALUE;
+                for (Location s:selected){
+                    dis= Math.min(dis, Math.abs(home.x-s.x)+Math.abs(home.y-s.y));
+                }
+                sum+=dis;
+            }
+            answer = Math.min(answer, sum);
+        }else if (L == stores.size()){
+            return;
+        }else{
+            selected.add(stores.get(L));
+            dfs2(M-1, L+1);
+            selected.remove(selected.size()-1);
+            dfs2(M, L+1);
         }
     }
 }

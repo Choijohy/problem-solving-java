@@ -1,3 +1,11 @@
+# 틀린 지점 - 날짜 구하기
+# 단순히 START_DATE > '2022-11-30' OR END_DATE < '2022-11-01'으로 대여가능 차를 선택하면 안됨 -> A차가 2개의 대여 이력을 가질 수 있고,
+# 만약 첫번째 이력은 위의 조건에 포함되지 않으나, 두번째 이력은 위의 조건에 포함(=11월 대여이력이 있는) 차 일 경우, A는 결과에 포함되면 안됨에도 포함되는 문제가 생김.
+# 단순히   WHERE START_DATE  BETWEEN '2022-11-01' AND '2022-11-30 OR END_DATE'  BETWEEN ' 2022-11-01' AND '2022-11-30'로 제외할 차를 구해도 안됨.
+#  -> 2022-01-01 ~ 2023-01-01 이런 이력은 못 잡아냄
+# TRUNCATE()
+
+
 WITH EXCLUDED_CARS AS (
     SELECT DISTINCT CAR_ID FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
     # WHERE START_DATE  BETWEEN '2022-11-01' AND '2022-11-30'

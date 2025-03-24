@@ -15,7 +15,7 @@ package 넓이우선탐색;
 import java.util.*;
 
 class GraphSearch {
-    public int solution(int n, int[][] edge) {
+    public int solution1(int n, int[][] edge) {
         List<List<Integer>> list = new ArrayList<>();
         for (int i=0; i<=n; i++){
             list.add(new ArrayList<>());
@@ -56,6 +56,47 @@ class GraphSearch {
         for (int i=2; i<=n; i++){
             if ((count-1) == visited[i]) answer++;
         }
+        return answer;
+    }
+    public int solution2(int n, int[][] edge){
+        ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
+        for (int i=0; i<=n; i++){
+            arr.add(new ArrayList<Integer>());
+        }
+        boolean[] visited = new boolean[n+1];
+
+        // 인접 노드 정보 추가
+        for (int i=0; i<edge.length; i++){
+            int[] temp = edge[i];
+            int a = temp[0];
+            int b = temp[1];
+
+            arr.get(a).add(b);
+            arr.get(b).add(a);
+        }
+
+        if(arr.get(1).isEmpty()) return 0;
+
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(1);
+        visited[1] = true;
+
+        int answer = 0;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            answer = size;
+            for (int i=0; i<size; i++){
+                int cur = queue.poll();
+                ArrayList<Integer> next = arr.get(cur);
+                for (int x: next){
+                    if (visited[x]==false){
+                        visited[x] = true;
+                        queue.offer(x);
+                    }
+                }
+            }
+        }
+
         return answer;
     }
 }

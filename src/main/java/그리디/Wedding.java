@@ -4,51 +4,48 @@ import java.util.*;
 import java.io.*;
 
 public class Wedding {
-  public static int solution(List<TimeLine> timeLine){
-  	int answer = 0;
-    int count = 0;
+    static int n;
+    static int answer = Integer.MIN_VALUE;
 
-    for (TimeLine x: timeLine){
-    	if (x.type == 's') count ++;
-        else count --;
-      	answer = Math.max(count, answer);
+    private static void getMaxPeople(ArrayList<TimeLine> arr){
+        int sum = 0;
+        for (TimeLine x:arr){
+            if (x.type == 's'){
+                sum ++;
+            }else sum --;
+
+            answer = Math.max(answer, sum);
+        }
     }
-    return answer;
-  }
-  public static void main(String[] args) throws IOException{
-   	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
 
-    int n = Integer.parseInt(br.readLine());
-    List<TimeLine> timeLine = new ArrayList<>();
-    for (int i=0; i<n; i++){
-    	String[] temp = br.readLine().split(" ");
-      	timeLine.add(new TimeLine(Integer.parseInt(temp[0]), 's'));
-        timeLine.add(new TimeLine(Integer.parseInt(temp[1]), 'e'));
+        ArrayList<TimeLine> arr = new ArrayList<>();
+
+        for (int i=0; i<n; i++){
+                String[] str = br.readLine().split(" ");
+                arr.add(new TimeLine(Integer.parseInt(str[0]), 's'));
+                arr.add(new TimeLine(Integer.parseInt(str[1]), 'e'));
+            }
+        Collections.sort(arr);
+        getMaxPeople(arr);
+        System.out.println(answer);
     }
-
-    Collections.sort(timeLine);
-    System.out.println(solution(timeLine));
-    return ;
-  }
 }
 
 class TimeLine implements Comparable<TimeLine>{
-	int time;
-  	char type;
+    int time;
+    char type;
 
-  	TimeLine(int time, char type){
-    	this.time = time;
-      	this.type = type;
+    TimeLine(int time, char type){
+        this.time = time;
+        this.type = type;
     }
 
-  	@Override
-  	public int compareTo(TimeLine o){
-    	if (this.time > o.time) return 1;
-      	else if (this.time < o. time) return -1;
-      	else {
-        	if (this.type > o.type) return 1;
-          	else if (this.type < o.type) return -1;
-          	else return 0;
-        }
+    @Override
+    public int compareTo(TimeLine o){
+        if (this.time == o.time) return this.type - o.type; // 알파벳순
+        else return this.time - o.time;
     }
 }
